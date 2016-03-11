@@ -4,12 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>webpro hunters</title>
-    <style type="text/less">
+    <style>
       .chart
       {
-        min-width: 310px;
         height: 400px;
-        margin: 0 auto;
+        margin: 0 auto 40px;
       }
     </style>
   </head>
@@ -17,18 +16,18 @@
     <div id="employee-cumulative-win-rate" class="chart"></div>
     <div id="character-cumulative-win-rate" class="chart"></div>
 
+    <div id="employee-cumulative-alive-rate" class="chart"></div>
+    <div id="character-cumulative-alive-rate" class="chart"></div>
+
     <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script>
       jQuery(function() {
         (function() {
-          var employees, characters;
+          var employees, characters, xAxisLabels;
 
           var buildEmployeeCumulativeWinRate = function(games) {
-            var xAxisLabels = _.map(_.range(games.length), function(i) { return 'Game ' + (i+1) + '<br>' + games[i].date; });
-
             /*
             series = {
               lwang: [1.0, 0.99, 0.98, ...],
@@ -115,16 +114,17 @@
                 layout: 'vertical',
                 align: 'right',
                 verticalAlign: 'middle',
-                borderWidth: 0
+                borderWidth: 0,
+                labelFormatter: function () {
+                  return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
+                }
               },
               series: series
             });
           };
 
           var buildCharacterCumulativeWinRate = function(games) {
-            var xAxisLabels = _.map(_.range(games.length), function(i) { return 'Game ' + (i+1) + '<br>' + games[i].date; });
-
-            // refer to buildEmployeeCumulativeWinRate for what the variables and the algorith does
+            // refer to buildEmployeeCumulativeWinRate for what the variables and the algorithm does
 
             var series = _.object(_.map(characters, function(name) { return [name, []] }));
             var temp = _.object(_.map(characters, function(name) { return [name, {wins: 0, played: 0}]; }));
@@ -183,18 +183,164 @@
                 layout: 'vertical',
                 align: 'right',
                 verticalAlign: 'middle',
-                borderWidth: 0
+                borderWidth: 0,
+                labelFormatter: function () {
+                  return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
+                }
+              },
+              series: series
+            });
+          };
+
+          var buildEmployeeCumulativeAliveRate = function(games) {
+            // refer to buildEmployeeCumulativeWinRate for what the variables and the algorithm does
+
+            var series = _.object(_.map(employees, function(jomax) { return [jomax, []] }));
+            var temp = _.object(_.map(employees, function(jomax) { return [jomax, {alives: 0, played: 0}]; }));
+
+            // calculate!
+            _.each(games, function(game) {
+              var players = game.players;
+
+              _.each(temp, function(tmp, jomax) {
+                if (players[jomax]) {
+                  temp[jomax].played++;
+
+                  if (players[jomax].alive)
+                    temp[jomax].alives++;
+
+                  var aliveRate = temp[jomax].alives / temp[jomax].played * 100;
+                  series[jomax].push(aliveRate);
+                }
+                else {
+                  // if jomax has NEVER played, push null
+                  // else, push same alive rate
+                  var lastAliveRate = null;
+
+                  if (temp[jomax].played)
+                    lastAliveRate = _.last(series[jomax]);
+
+                  series[jomax].push(lastAliveRate);
+                }
+              });
+            });
+
+            series = _.map(series, function(ar, jomax) { return {name: jomax, data: ar}; })
+
+            $('#employee-cumulative-alive-rate').highcharts({
+              title: {
+                text: 'Employee Cumulative Alive Rate Over Time'
+              },
+              //subtitle: { text: 'Source: WorldClimate.com' },
+              xAxis: {
+                categories: xAxisLabels
+              },
+              yAxis: {
+                  title: {
+                    text: 'Alive Rate ( % )'
+                  },
+                  plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }],
+                  min: 0,
+                  max: 100
+              },
+              tooltip: {
+                valueSuffix: '%'
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0,
+                labelFormatter: function () {
+                  return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
+                }
+              },
+              series: series
+            });
+          };
+
+          var buildCharacterCumulativeAliveRate = function(games) {
+            // refer to buildEmployeeCumulativeWinRate for what the variables and the algorithm does
+
+            var series = _.object(_.map(characters, function(name) { return [name, []] }));
+            var temp = _.object(_.map(characters, function(name) { return [name, {alives: 0, played: 0}]; }));
+
+            _.each(games, function(game) {
+              var players = game.players;
+              var playedCharacters = _.map(players, function(result) {
+                var name = result.character;
+
+                temp[name].played++;
+                if (result.win)
+                  temp[name].alives++;
+
+                var aliveRate = temp[name].alives / temp[name].played * 100;
+                series[name].push(aliveRate);
+
+                return name;
+              });
+              var unplayedCharacters = _.difference(characters, playedCharacters);
+              _.each(unplayedCharacters, function(name) {
+                var lastAliveRate = null;
+
+                if (temp[name].played)
+                  lastAliveRate = _.last(series[name]);
+
+                series[name].push(lastAliveRate);
+              });
+            });
+
+            series = _.map(series, function(ar, name) { return {name: name, data: ar}; })
+
+            $('#character-cumulative-alive-rate').highcharts({
+              title: {
+                text: 'Character Cumulative Alive Rate Over Time'
+              },
+              //subtitle: { text: 'Source: WorldClimate.com' },
+              xAxis: {
+                categories: xAxisLabels
+              },
+              yAxis: {
+                  title: {
+                    text: 'Alive Rate ( % )'
+                  },
+                  plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }],
+                  min: 0,
+                  max: 100
+              },
+              tooltip: {
+                valueSuffix: '%'
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0,
+                labelFormatter: function () {
+                  return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
+                }
               },
               series: series
             });
           };
 
           $.getJSON('/games.json', function(games) {
+            xAxisLabels = _.map(_.range(games.length), function(i) { return 'Game ' + (i+1) + '<br>' + games[i].date; });
             employees = _.uniq(_.flatten(_.map(_.pluck(games, 'players'), _.keys)));
             characters = [ 'Agnes', 'Allie', 'Bob', 'Bryan', 'Catherine', 'Charles', 'Daniel', 'David', 'Ellen', 'Emi', 'Franklin', 'Fuka', 'George', 'Gregor', 'Ultrasoul', 'Unknown', 'Valkyrie', 'Vampire', 'Werewolf', 'Wight'];
 
             buildEmployeeCumulativeWinRate(games);
             buildCharacterCumulativeWinRate(games);
+            buildEmployeeCumulativeAliveRate(games);
+            buildCharacterCumulativeAliveRate(games);
           });
         })();
       });
