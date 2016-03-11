@@ -1,96 +1,96 @@
 [
   {
-    date: '2016-03-10',
-    players: {
-      lwang: {
-        character: 'Fuka',
-        win: true,
-        alive: true
+    "date" : "2016-03-10",
+    "players" : {
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Daniel",
+        "win" : true
       },
-      heng: {
-        character: 'George',
-        win: true,
-        alive: true
+      "afowler" : {
+        "alive" : false,
+        "character" : "Wight",
+        "win" : false
       },
-      rchen: {
-        character: 'Ultrasoul',
-        win: false,
-        alive: false
+      "heng" : {
+        "alive" : true,
+        "character" : "George",
+        "win" : true
       },
-      afowler: {
-        character: 'Wight',
-        win: false,
-        alive: false
+      "lwang" : {
+        "alive" : true,
+        "character" : "Fuka",
+        "win" : true
       },
-      adebruyn: {
-        character: 'Daniel',
-        win: true,
-        alive: true
+      "rchen" : {
+        "alive" : false,
+        "character" : "Ultrasoul",
+        "win" : false
       }
     }
   },
   {
-    date: '2016-03-10',
-    players: {
-      lwang: {
-        character: 'Emi',
-        win: true,
-        alive: true
+    "date" : "2016-03-10",
+    "players" : {
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Allie",
+        "win" : true
       },
-      heng: {
-        character: 'Vampire',
-        win: false,
-        alive: false
+      "afowler" : {
+        "alive" : true,
+        "character" : "Fuka",
+        "win" : true
       },
-      rchen: {
-        character: 'Unknown',
-        win: false,
-        alive: false
+      "heng" : {
+        "alive" : false,
+        "character" : "Vampire",
+        "win" : false
       },
-      afowler: {
-        character: 'Fuka',
-        win: true,
-        alive: true
+      "lwang" : {
+        "alive" : true,
+        "character" : "Emi",
+        "win" : true
       },
-      adebruyn: {
-        character: 'Allie',
-        win: true,
-        alive: true
+      "rchen" : {
+        "alive" : false,
+        "character" : "Unknown",
+        "win" : false
       }
     }
   },
   {
-    date: '2016-03-10',
-    players: {
-      lwang: {
-        character: 'Wight',
-        win: true,
-        alive: true
+    "date" : "2016-03-10",
+    "players" : {
+      "adebruyn" : {
+        "alive" : false,
+        "character" : "Bryan",
+        "win" : false
       },
-      rchen: {
-        character: 'Unknown',
-        win: true,
-        alive: true
+      "afowler" : {
+        "alive" : false,
+        "character" : "Agnes",
+        "win" : true
       },
-      afowler: {
-        character: 'Agnes',
-        win: true,
-        alive: false
+      "ischiffer" : {
+        "alive" : false,
+        "character" : "Ellen",
+        "win" : false
       },
-      adebruyn: {
-        character: 'Bryan',
-        win: false,
-        alive: false
+      "lwang" : {
+        "alive" : true,
+        "character" : "Wight",
+        "win" : true
       },
-      sbhadkamkar: {
-        character: 'Franklin',
-        win: false,
-        alive: false
+      "rchen" : {
+        "alive" : true,
+        "character" : "Unknown",
+        "win" : true
       },
-      ischiffer: {
-        character: 'Ellen',
-        win: false,
-        alive: false
+      "sbhadkamkar" : {
+        "alive" : false,
+        "character" : "Franklin",
+        "win" : false
       }
     }
   }
