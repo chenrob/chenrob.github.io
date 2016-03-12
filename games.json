@@ -93,5 +93,40 @@
         "win" : false
       }
     }
+  },
+  {
+    "date": "2016-03-11",
+    "players" : {
+      "adebruyn" : {
+        "alive" : false,
+        "character" : "Unknown",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Gregor",
+        "win" : true
+      },
+      "heng" : {
+        "alive" : false,
+        "character" : "Werewolf",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Catherine",
+        "win" : false
+      },
+      "rchen" : {
+        "alive" : true,
+        "character" : "Franklin",
+        "win" : true
+      },
+      "sbhadkamkar" : {
+        "alive" : true,
+        "character" : "Allie",
+        "win" : true
+      }
+    }
   }
 ]
