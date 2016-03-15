@@ -203,7 +203,7 @@
             // refer to buildEmployeeCumulativeWinRate for what the variables and the algorithm does
 
             var series = { hunters: [], shadows: [], neutral: [] };
-            var temp = { hunters: {wins: 0, played: 0}, shadows: {wins: 0, played: 0}, neutrals: {wins: 0, played: 0}};
+            var temp = { hunters: {wins: 0, played: 0}, shadows: {wins: 0, played: 0}, neutral: {wins: 0, played: 0}};
 
             _.each(games, function(game) {
               var win = { hunters: false, shadows: false, neutral: false};
@@ -227,7 +227,7 @@
               temp.hunters.played++;
               temp.shadows.played++;
               if (played.neutral)
-                temp.neutrals.played++;
+                temp.neutral.played++;
 
               if (win.hunters)
                 temp.hunters.wins++;
