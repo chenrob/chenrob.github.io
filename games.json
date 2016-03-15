@@ -128,5 +128,46 @@
         "win" : true
       }
     }
+  },
+  {
+    "date": "2016-03-14",
+    "comments": "Lu fucked up and dealt 3 hunters vs 1 shadow"
+    "players" : {
+      "lwang": {
+        "alive": true,
+        "character": "Charles",
+        "win": false
+      },
+      "sbhadkamkar": {
+        "alive": false,
+        "character": "Vampire",
+        "win": false
+      },
+      "ndwyer": {
+        "alive": true,
+        "character": "Ellen",
+        "win": true
+      },
+      "rchen": {
+        "alive": true,
+        "character": "Franklin",
+        "win": true
+      },
+      "cling": {
+        "alive": false,
+        "character": "Agnes",
+        "win": true
+      },
+      "ischiffer": {
+        "alive": true,
+        "character": "George",
+        "win": true
+      },
+      "adebruyn": {
+        "alive": true,
+        "character": "Bryan",
+        "win": false
+      }
+    }
   }
 ]
