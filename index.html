@@ -15,9 +15,11 @@
   <body>
     <div id="employee-cumulative-win-rate" class="chart"></div>
     <div id="character-cumulative-win-rate" class="chart"></div>
+    <div id="faction-cumulative-win-rate" class="chart"></div>
 
     <div id="employee-cumulative-alive-rate" class="chart"></div>
     <div id="character-cumulative-alive-rate" class="chart"></div>
+    <div id="faction-cumulative-alive-rate" class="chart"></div>
 
     <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
@@ -25,7 +27,12 @@
     <script>
       jQuery(function() {
         (function() {
-          var employees, characters, xAxisLabels;
+          var hunters = ['Ellen', 'Emi', 'Franklin', 'Fuka', 'George', 'Gregor'];
+          var shadows = ['Ultrasoul', 'Unknown', 'Valkyrie', 'Vampire', 'Werewolf', 'Wight'];
+          var neutrals = ['Agnes', 'Allie', 'Bob', 'Bryan', 'Catherine', 'Charles', 'Daniel', 'David'];
+          var characters = _.union(hunters, shadows, neutrals);
+
+          var employees, xAxisLabels;
 
           var buildEmployeeCumulativeWinRate = function(games) {
             /*
@@ -192,6 +199,93 @@
             });
           };
 
+          var buildFactionCumulativeWinRate = function(games) {
+            // refer to buildEmployeeCumulativeWinRate for what the variables and the algorithm does
+
+            var series = { hunters: [], shadows: [], neutral: [] };
+            var temp = { hunters: {wins: 0, played: 0}, shadows: {wins: 0, played: 0}, neutrals: {wins: 0, played: 0}};
+
+            _.each(games, function(game) {
+              var win = { hunters: false, shadows: false, neutral: false};
+              var played = { hunters: false, shadows: false, neutral: false};
+
+              _.each(game.players, function(playerResult) {
+                var faction = 'neutral';
+
+                if (_.contains(hunters, playerResult.character))
+                  faction = 'hunters';
+                else if (_.contains(shadows, playerResult.character))
+                  faction = 'shadows';
+
+                played[faction] = true;
+
+                if (playerResult.win)
+                  win[faction] = true;
+              });
+
+              // calculate cumulatives
+              temp.hunters.played++;
+              temp.shadows.played++;
+              if (played.neutral)
+                temp.neutrals.played++;
+
+              if (win.hunters)
+                temp.hunters.wins++;
+
+              if (win.shadows)
+                temp.shadows.wins++;
+
+              if (win.neutral)
+                temp.neutral.wins++;
+
+              series.hunters.push(temp.hunters.wins / temp.hunters.played * 100);
+              series.shadows.push(temp.shadows.wins / temp.shadows.played * 100);
+              series.neutral.push(temp.neutral.wins / temp.neutral.played * 100);
+            });
+
+            series = [
+              { name: 'Hunters', data: series.hunters },
+              { name: 'Shadows', data: series.shadows },
+              { name: 'Neutrals', data: series.neutral }
+            ];
+
+            $('#faction-cumulative-win-rate').highcharts({
+              title: {
+                text: 'Faction Cumulative Win Rate Over Time'
+              },
+              //subtitle: { text: 'Source: WorldClimate.com' },
+              xAxis: {
+                categories: xAxisLabels
+              },
+              yAxis: {
+                  title: {
+                    text: 'Win Rate ( % )'
+                  },
+                  plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }],
+                  min: 0,
+                  max: 100
+              },
+              tooltip: {
+                valueSuffix: '%'
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0,
+                labelFormatter: function () {
+                  return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
+                }
+              },
+              series: series
+            });
+
+          };
+
           var buildEmployeeCumulativeAliveRate = function(games) {
             // refer to buildEmployeeCumulativeWinRate for what the variables and the algorithm does
 
@@ -335,7 +429,6 @@
           $.getJSON('/games.json', function(games) {
             xAxisLabels = _.map(_.range(games.length), function(i) { return 'Game ' + (i+1) + '<br>' + games[i].date; });
             employees = _.uniq(_.flatten(_.map(_.pluck(games, 'players'), _.keys)));
-            characters = [ 'Agnes', 'Allie', 'Bob', 'Bryan', 'Catherine', 'Charles', 'Daniel', 'David', 'Ellen', 'Emi', 'Franklin', 'Fuka', 'George', 'Gregor', 'Ultrasoul', 'Unknown', 'Valkyrie', 'Vampire', 'Werewolf', 'Wight'];
 
             buildEmployeeCumulativeWinRate(games);
             buildCharacterCumulativeWinRate(games);
