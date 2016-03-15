@@ -275,7 +275,7 @@
                 var name = result.character;
 
                 temp[name].played++;
-                if (result.win)
+                if (result.alive)
                   temp[name].alives++;
 
                 var aliveRate = temp[name].alives / temp[name].played * 100;
