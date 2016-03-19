@@ -169,5 +169,35 @@
         "win": false
       }
     }
+  },
+  {
+    "date": "2016-03-18",
+    "players" : {
+      "lwang": {
+        "alive": true,
+        "character": "Gregor",
+        "win": true
+      },
+      "sbhadkamkar": {
+        "alive": false,
+        "character": "Vampire",
+        "win": false
+      },
+      "cling": {
+        "alive": false,
+        "character": "Ultrasoul",
+        "win": false
+      },
+      "heng": {
+        "alive": false,
+        "character": "Emi",
+        "win": true
+      },
+      "adebruyn": {
+        "alive": false,
+        "character": "Bob",
+        "win": false
+      }
+    }
   }
 ]
