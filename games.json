@@ -269,5 +269,80 @@
         "win": true
       }
     }
+  },
+  {
+    "date" : "2016-03-22",
+    "players" : {
+      "adebruyn" : {
+        "alive" : false,
+        "character" : "Fuka",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : false,
+        "character" : "Ellen",
+        "win" : false
+      },
+      "ischiffer" : {
+        "alive" : true,
+        "character" : "Agnes",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Charles",
+        "win" : true
+      },
+      "rchen" : {
+        "alive" : false,
+        "character" : "Ultrasoul",
+        "win" : true
+      },
+      "heng" : {
+        "alive" : true,
+        "character" : "Bob",
+        "win" : false
+      },
+      "cling": {
+        "alive": true,
+        "character": "Wight",
+        "win": true
+      }
+    }
+  },
+  {
+    "date" : "2016-03-22",
+    "players" : {
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Franklin",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : false,
+        "character" : "Catherine",
+        "win" : true
+      },
+      "ischiffer" : {
+        "alive" : true,
+        "character" : "Wight",
+        "win" : false
+      },
+      "rchen" : {
+        "alive" : true,
+        "character" : "Allie",
+        "win" : true
+      },
+      "heng" : {
+        "alive" : true,
+        "character" : "Unknown",
+        "win" : false
+      },
+      "cling": {
+        "alive": true,
+        "character": "Emi",
+        "win": false
+      }
+    }
   }
 ]
