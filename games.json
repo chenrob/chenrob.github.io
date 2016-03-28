@@ -344,5 +344,150 @@
         "win": false
       }
     }
+  },
+  {
+    "date" : "2016-03-24",
+    "players" : {
+      "afowler" : {
+        "alive" : false,
+        "character" : "Franklin",
+        "win" : false
+      },
+      "cling": {
+        "alive": false,
+        "character": "Werewolf",
+        "win": true
+      },
+      "heng" : {
+        "alive" : true,
+        "character" : "Ultrasoul",
+        "win" : true
+      },
+      "ischiffer" : {
+        "alive" : false,
+        "character" : "Ellen",
+        "win" : false
+      },
+      "sbhadkamkar" : {
+        "alive" : true,
+        "character" : "Bob",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Allie",
+        "win" : true
+      }
+    }
+  },
+  {
+    "date" : "2016-03-24",
+    "players" : {
+      "lwang" : {
+        "alive" : true,
+        "character" : "Bryan",
+        "win" : true
+      },
+      "sbhadkamkar" : {
+        "alive" : true,
+        "character" : "Allie",
+        "win" : true
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Vampire",
+        "win" : false
+      },
+      "ischiffer" : {
+        "alive" : false,
+        "character" : "Werewolf",
+        "win" : false
+      },
+      "heng" : {
+        "alive" : true,
+        "character" : "Emi",
+        "win" : false
+      },
+      "cling": {
+        "alive": false,
+        "character": "Fuka",
+        "win": false
+      }
+    }
+  },
+  {
+    "date" : "2016-03-25",
+    "players" : {
+      "cling": {
+        "alive": false,
+        "character": "Werewolf",
+        "win": false
+      },
+      "ischiffer" : {
+        "alive" : true,
+        "character" : "Franklin",
+        "win" : true
+      },
+      "afowler" : {
+        "alive" : false,
+        "character" : "Valkyrie",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : false,
+        "character" : "Daniel",
+        "win" : false
+      },
+      "adebruyn" : {
+        "alive" : false,
+        "character" : "David",
+        "win" : false
+      },
+      "sbhadkamkar" : {
+        "alive" : true,
+        "character" : "George",
+        "win" : true
+      }
+    }
+  },
+  {
+    "date" : "2016-03-25",
+    "players" : {
+      "ischiffer" : {
+        "alive" : true,
+        "character" : "Emi",
+        "win" : true
+      },
+      "sbhadkamkar" : {
+        "alive" : false,
+        "character" : "Unknown",
+        "win" : false
+      },
+      "cling": {
+        "alive": false,
+        "character": "Wight",
+        "win": false
+      },
+      "heng" : {
+        "alive" : true,
+        "character" : "Catherine",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Bryan",
+        "win" : false
+      },
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Fuka",
+        "win" : true,
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Agnes",
+        "win" : true
+      }
+    }
   }
 ]
