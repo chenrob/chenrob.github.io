@@ -34,6 +34,10 @@
 
           var employees, xAxisLabels;
 
+          var sortSeries = function(ar) {
+            return _.sortBy(ar, function(o) { return -1 * _.last(o.data) });
+          };
+
           var buildEmployeeCumulativeWinRate = function(games) {
             /*
             series = {
@@ -126,7 +130,7 @@
                   return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
                 }
               },
-              series: series
+              series: sortSeries(series)
             });
           };
 
@@ -195,7 +199,7 @@
                   return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
                 }
               },
-              series: series
+              series: sortSeries(series)
             });
           };
 
@@ -281,9 +285,8 @@
                   return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
                 }
               },
-              series: series
+              series: sortSeries(series)
             });
-
           };
 
           var buildEmployeeCumulativeAliveRate = function(games) {
@@ -353,7 +356,7 @@
                   return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
                 }
               },
-              series: series
+              series: sortSeries(series)
             });
           };
 
@@ -422,11 +425,101 @@
                   return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
                 }
               },
-              series: series
+              series: sortSeries(series)
             });
           };
 
-          $.getJSON('/games.json', function(games) {
+          var buildFactionCumulativeAliveRate = function(games) {
+            // refer to buildEmployeeCumulativeWinRate for what the variables and the algorithm does
+
+            var series = { hunters: [], shadows: [], neutral: [] };
+            var temp = { hunters: {alive: 0, played: 0}, shadows: {alive: 0, played: 0}, neutral: {alive: 0, played: 0}};
+
+            _.each(games, function(game) {
+              var alive = { hunters: false, shadows: false, neutral: false};
+              var played = { hunters: false, shadows: false, neutral: false};
+
+              _.each(game.players, function(playerResult) {
+                var faction = 'neutral';
+
+                if (_.contains(hunters, playerResult.character))
+                  faction = 'hunters';
+                else if (_.contains(shadows, playerResult.character))
+                  faction = 'shadows';
+
+                played[faction] = true;
+
+                if (playerResult.alive)
+                  alive[faction] = true;
+              });
+
+              // calculate cumulatives
+              temp.hunters.played++;
+              temp.shadows.played++;
+              if (played.neutral)
+                temp.neutral.played++;
+
+              if (alive.hunters)
+                temp.hunters.alive++;
+
+              if (alive.shadows)
+                temp.shadows.alive++;
+
+              if (alive.neutral)
+                temp.neutral.alive++;
+
+              series.hunters.push(temp.hunters.alive / temp.hunters.played * 100);
+              series.shadows.push(temp.shadows.alive / temp.shadows.played * 100);
+              series.neutral.push(temp.neutral.alive / temp.neutral.played * 100);
+            });
+
+            series = [
+              { name: 'Hunters', data: series.hunters },
+              { name: 'Shadows', data: series.shadows },
+              { name: 'Neutrals', data: series.neutral }
+            ];
+
+            $('#faction-cumulative-alive-rate').highcharts({
+              title: {
+                text: 'Faction Cumulative Alive Rate Over Time'
+              },
+              //subtitle: { text: 'Source: WorldClimate.com' },
+              xAxis: {
+                categories: xAxisLabels
+              },
+              yAxis: {
+                  title: {
+                    text: 'Alive Rate ( % )'
+                  },
+                  plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }],
+                  min: 0,
+                  max: 100
+              },
+              tooltip: {
+                valueSuffix: '%'
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0,
+                labelFormatter: function () {
+                  return this.name + ' (' + (Highcharts.numberFormat(_.last(this.yData), 0)) + '%)';
+                }
+              },
+              series: sortSeries(series)
+            });
+          };
+
+          var url = '/games.json';
+          if (window.location.href.indexOf('http') != 0)
+            url = 'http://chenrob.github.io' + url;
+
+          $.getJSON(url, function(games) {
             xAxisLabels = _.map(_.range(games.length), function(i) { return 'Game ' + (i+1) + '<br>' + games[i].date; });
             employees = _.uniq(_.flatten(_.map(_.pluck(games, 'players'), _.keys)));
 
@@ -435,6 +528,7 @@
             buildFactionCumulativeWinRate(games);
             buildEmployeeCumulativeAliveRate(games);
             buildCharacterCumulativeAliveRate(games);
+            buildFactionCumulativeAliveRate(games);
           });
         })();
       });
