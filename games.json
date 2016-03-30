@@ -489,5 +489,70 @@
         "win" : true
       }
     }
+  },
+  {
+    "date" : "2016-03-29",
+    "players" : {
+      "rchen" : {
+        "alive" : false,
+        "character" : "Unknown",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : false,
+        "character" : "Bryan",
+        "win" : false
+      },
+      "sbhadkamkar" : {
+        "alive" : true,
+        "character" : "Agnes",
+        "win" : true
+      },
+      "cling": {
+        "alive": true,
+        "character": "Fuka",
+        "win": true
+      },
+      "afowler" : {
+        "alive" : false,
+        "character" : "Wight",
+        "win" : false
+      },
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Gregor",
+        "win" : true
+      }
+    }
+  },
+  {
+    "date" : "2016-03-29",
+    "players" : {
+      "rchen" : {
+        "alive" : true,
+        "character" : "Emi",
+        "win" : true
+      },
+      "lwang" : {
+        "alive" : false,
+        "character" : "Unknown",
+        "win" : false
+      },
+      "cling": {
+        "alive": false,
+        "character": "Agnes",
+        "win": false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Gregor",
+        "win" : true
+      },
+      "adebruyn" : {
+        "alive" : false,
+        "character" : "Valkyrie",
+        "win" : false
+      }
+    }
   }
 ]
