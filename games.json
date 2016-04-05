@@ -553,5 +553,40 @@
         "win" : true
       }
     }
+  },
+  {
+    "date" : "2016-04-05",
+    "players" : {
+      "rchen" : {
+        "alive" : true,
+        "character" : "Franklin",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : false,
+        "character" : "Catherine",
+        "win" : true
+      },
+      "sbhadkamkar" : {
+        "alive" : true,
+        "character" : "Vampire",
+        "win" : false
+      },
+      "cling": {
+        "alive": true,
+        "character": "Gregor",
+        "win": false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Agnes",
+        "win" : false
+      },
+      "heng": {
+        "alive": true,
+        "character": "Wight",
+        "win": false
+      }
+    }
   }
 ]
