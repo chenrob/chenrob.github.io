@@ -621,7 +621,7 @@
         "alive" : true,
         "character" : "Gregor",
         "win" : true
-      },
+      }
     }
   },
   {
@@ -656,7 +656,7 @@
         "alive" : false,
         "character" : "Ellen",
         "win" : false
-      },
+      }
     }
   },
   {
@@ -691,7 +691,7 @@
         "alive" : true,
         "character" : "George",
         "win" : false
-      },
+      }
     }
   },
   {
@@ -726,7 +726,7 @@
         "alive" : false,
         "character" : "Franklin",
         "win" : false
-      },
+      }
     }
   }
 ]
