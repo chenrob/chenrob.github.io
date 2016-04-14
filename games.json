@@ -658,5 +658,75 @@
         "win" : false
       },
     }
+  },
+  {
+    "date" : "2016-04-13",
+    "players" : {
+      "rchen" : {
+        "alive" : true,
+        "character" : "Franklin",
+        "win" : false
+      },
+      "cling": {
+        "alive": true,
+        "character": "Valkyrie",
+        "win": false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Allie",
+        "win" : true
+      },
+      "heng": {
+        "alive": true,
+        "character": "Bob",
+        "win": true
+      },
+      "adebruyn" : {
+        "alive" : false,
+        "character" : "Wight",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "George",
+        "win" : false
+      },
+    }
+  },
+  {
+    "date" : "2016-04-13",
+    "players" : {
+      "rchen" : {
+        "alive" : true,
+        "character" : "Werewolf",
+        "win" : true
+      },
+      "cling": {
+        "alive": true,
+        "character": "Bryan",
+        "win": false
+      },
+      "afowler" : {
+        "alive" : false,
+        "character" : "Emi",
+        "win" : false
+      },
+      "heng": {
+        "alive": true,
+        "character": "Valkyrie",
+        "win": true
+      },
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Charles",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : false,
+        "character" : "Franklin",
+        "win" : false
+      },
+    }
   }
 ]
