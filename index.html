@@ -657,9 +657,13 @@
                 var winPct = (charTemp[x].win / charTemp[x].played * 100);
                 var alivePct = (charTemp[x].alive / charTemp[x].played * 100);
 
-                characterAr.push(x + '<br>Win' + winPct.toFixed(1) + '%<br>Alive' + alivePct.toFixed(1) + '%');
-                characterWins.push(winPct);
-                characterAlives.push(alivePct);
+                var insertFn = 'unshift';
+                if (!winPct && !alivePct)
+                  insertFn = 'push';
+
+                characterAr[insertFn].call(characterAr, x + '<br>Win' + winPct.toFixed(1) + '%<br>Alive' + alivePct.toFixed(1) + '%');
+                characterWins[insertFn].call(characterWins, winPct);
+                characterAlives[insertFn].call(characterAlives, alivePct);
               });
 
               var $card = $(document.createElement('div')).addClass('card').appendTo($wrap);
