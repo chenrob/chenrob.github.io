@@ -12,7 +12,7 @@
         "character" : "Wight",
         "win" : false
       },
-      "heng" : {
+      "hong" : {
         "alive" : true,
         "character" : "George",
         "win" : true
@@ -42,7 +42,7 @@
         "character" : "Fuka",
         "win" : true
       },
-      "heng" : {
+      "hong" : {
         "alive" : false,
         "character" : "Vampire",
         "win" : false
@@ -87,7 +87,7 @@
         "character" : "Unknown",
         "win" : true
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : false,
         "character" : "Franklin",
         "win" : false
@@ -107,7 +107,7 @@
         "character" : "Gregor",
         "win" : true
       },
-      "heng" : {
+      "hong" : {
         "alive" : false,
         "character" : "Werewolf",
         "win" : false
@@ -122,7 +122,7 @@
         "character" : "Franklin",
         "win" : true
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : true,
         "character" : "Allie",
         "win" : true
@@ -137,7 +137,7 @@
         "character": "Gregor",
         "win": true
       },
-      "sbhadkamkar": {
+      "sbhadkamk": {
         "alive": false,
         "character": "Vampire",
         "win": false
@@ -147,7 +147,7 @@
         "character": "Ultrasoul",
         "win": false
       },
-      "heng": {
+      "hong": {
         "alive": false,
         "character": "Emi",
         "win": true
@@ -167,7 +167,7 @@
         "character": "Allie",
         "win": true
       },
-      "sbhadkamkar": {
+      "sbhadkamk": {
         "alive": true,
         "character": "Vampire",
         "win": true
@@ -177,7 +177,7 @@
         "character": "Franklin",
         "win": false
       },
-      "heng": {
+      "hong": {
         "alive": true,
         "character": "Wight",
         "win": true
@@ -202,7 +202,7 @@
         "character": "Werewolf",
         "win": false
       },
-      "sbhadkamkar": {
+      "sbhadkamk": {
         "alive": false,
         "character": "Allie",
         "win": false
@@ -212,7 +212,7 @@
         "character": "Gregor",
         "win": true
       },
-      "heng": {
+      "hong": {
         "alive": false,
         "character": "Unknown",
         "win": false
@@ -257,7 +257,7 @@
         "character" : "Ultrasoul",
         "win" : true
       },
-      "heng" : {
+      "hong" : {
         "alive" : true,
         "character" : "Bob",
         "win" : false
@@ -292,7 +292,7 @@
         "character" : "Allie",
         "win" : true
       },
-      "heng" : {
+      "hong" : {
         "alive" : true,
         "character" : "Unknown",
         "win" : false
@@ -317,7 +317,7 @@
         "character": "Werewolf",
         "win": true
       },
-      "heng" : {
+      "hong" : {
         "alive" : true,
         "character" : "Ultrasoul",
         "win" : true
@@ -327,7 +327,7 @@
         "character" : "Ellen",
         "win" : false
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : true,
         "character" : "Bob",
         "win" : false
@@ -347,7 +347,7 @@
         "character" : "Bryan",
         "win" : true
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : true,
         "character" : "Allie",
         "win" : true
@@ -362,7 +362,7 @@
         "character" : "Werewolf",
         "win" : false
       },
-      "heng" : {
+      "hong" : {
         "alive" : true,
         "character" : "Emi",
         "win" : false
@@ -402,7 +402,7 @@
         "character" : "David",
         "win" : false
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : true,
         "character" : "George",
         "win" : true
@@ -417,7 +417,7 @@
         "character" : "Emi",
         "win" : true
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : false,
         "character" : "Unknown",
         "win" : false
@@ -427,7 +427,7 @@
         "character": "Wight",
         "win": false
       },
-      "heng" : {
+      "hong" : {
         "alive" : true,
         "character" : "Catherine",
         "win" : false
@@ -462,7 +462,7 @@
         "character" : "Bryan",
         "win" : false
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : true,
         "character" : "Agnes",
         "win" : true
@@ -522,7 +522,7 @@
         "character" : "Allie",
         "win" : true
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : true,
         "character" : "Wight",
         "win" : true
@@ -567,7 +567,7 @@
         "character" : "Catherine",
         "win" : true
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : true,
         "character" : "Vampire",
         "win" : false
@@ -582,7 +582,7 @@
         "character" : "Agnes",
         "win" : false
       },
-      "heng": {
+      "hong": {
         "alive": true,
         "character": "Wight",
         "win": false
@@ -607,7 +607,7 @@
         "character" : "Agnes",
         "win" : true
       },
-      "heng": {
+      "hong": {
         "alive": true,
         "character": "Allie",
         "win": true
@@ -642,7 +642,7 @@
         "character" : "Valkyrie",
         "win" : true
       },
-      "heng": {
+      "hong": {
         "alive": false,
         "character": "Bob",
         "win": false
@@ -677,7 +677,7 @@
         "character" : "Allie",
         "win" : true
       },
-      "heng": {
+      "hong": {
         "alive": true,
         "character": "Bob",
         "win": true
@@ -712,7 +712,7 @@
         "character" : "Emi",
         "win" : false
       },
-      "heng": {
+      "hong": {
         "alive": true,
         "character": "Valkyrie",
         "win": true
@@ -737,7 +737,7 @@
         "character" : "Bob",
         "win" : false
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : false,
         "character" : "Valkyrie",
         "win" : false
@@ -757,7 +757,7 @@
         "character" : "Allie",
         "win" : true
       },
-      "heng": {
+      "hong": {
         "alive": false,
         "character": "Werewolf",
         "win": false
@@ -787,12 +787,12 @@
         "character": "Fuka",
         "win": true
       },
-      "sbhadkamkar" : {
+      "sbhadkamk" : {
         "alive" : true,
         "character" : "Bryan",
         "win" : false
       },
-      "heng": {
+      "hong": {
         "alive": true,
         "character": "Charles",
         "win": false

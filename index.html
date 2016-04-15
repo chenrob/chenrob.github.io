@@ -13,11 +13,24 @@
 
       .card
       {
+        position: relative;
+
         display: inline-block;
         width: 48%;
         margin: 0 1% 40px;
 
         outline: 1px solid #555;
+      }
+
+      .card-avatar-bg
+      {
+        position: absolute;
+        top:0;left:0;right:0;bottom:0;
+
+        background-size: cover;
+        background-position: center center;
+
+        opacity: 0.2;
       }
 
       .card-chart
@@ -667,13 +680,22 @@
               });
 
               var $card = $(document.createElement('div')).addClass('card').appendTo($wrap);
+
+              $.getJSON('https://github.secureserver.net/api/v3/users/' + jomax + '?access_token=e67720eddc5fdf7270ec6c5c1fc14bee72bcb971', function(o) {
+                $(document.createElement('div'))
+                  .addClass('card-avatar-bg')
+                  .css('background-image', 'url(' + o.avatar_url + ')')
+                  .appendTo($card);
+              });
+
               var $winFaction = $(document.createElement('div')).addClass('card-chart card-chart-1').appendTo($card);
               var $winCharacter = $(document.createElement('div')).addClass('card-chart card-chart-2').appendTo($card);
 
               //column (jomax win rate as a hunter, shadow, neutral)
               $winFaction.highcharts({
                 chart: {
-                  type: 'column'
+                  type: 'column',
+                  backgroundColor: null
                 },
                 title: {
                   text: jomax
@@ -719,7 +741,8 @@
               $winCharacter.highcharts({
                 chart: {
                   polar: true,
-                  type: 'area'
+                  type: 'area',
+                  backgroundColor: null
                 },
                 title: {
                   text: ''
