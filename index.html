@@ -58,27 +58,33 @@
     <script>
       jQuery(function() {
         (function() {
-          var hunters = ['Ellen', 'Emi', 'Franklin', 'Fuka', 'George', 'Gregor'];
-          var shadows = ['Ultrasoul', 'Unknown', 'Valkyrie', 'Vampire', 'Werewolf', 'Wight'];
-          var neutrals = ['Agnes', 'Allie', 'Bob', 'Bryan', 'Catherine', 'Charles', 'Daniel', 'David'];
-
-          var characters = _.union(hunters, shadows, neutrals);
-          var factions = ['hunters', 'shadows', 'neutral'];
-
+          // will be set once we load games.json
           var employees, xAxisLabels;
+
+          // rawr single point of truth
+          var FACTION_CHARS = {
+            "Hunters": ['Ellen', 'Emi', 'Franklin', 'Fuka', 'George', 'Gregor'],
+            "Shadows": ['Ultrasoul', 'Unknown', 'Valkyrie', 'Vampire', 'Werewolf', 'Wight'],
+            "Neutral": ['Agnes', 'Allie', 'Bob', 'Bryan', 'Catherine', 'Charles', 'Daniel', 'David']
+          };
+
+          var factions = _.keys(FACTION_CHARS);
+          var characters = _.flatten(_.values(FACTION_CHARS));
 
           var sortSeries = function(ar) {
             return _.sortBy(ar, function(o) { return -1 * _.last(o.data) });
           };
 
           var getFaction = function(character) {
-            var faction = 'neutral';
-            if (_.contains(hunters, character))
-              faction = 'hunters';
-            else if (_.contains(shadows, character))
-              faction = 'shadows';
+            var ret;
 
-            return faction;
+            _.each(FACTION_CHARS, function(characters, faction) {
+              if (_.contains(characters, character)) {
+                ret = faction;
+              }
+            });
+
+            return ret;
           }
 
           var buildEmployeeCumulativeWinRate = function(games) {
@@ -172,6 +178,7 @@
                   max: 100
               },
               tooltip: {
+                valueDecimals: 1,
                 valueSuffix: '%'
               },
               legend: {
@@ -251,6 +258,7 @@
                   max: 100
               },
               tooltip: {
+                valueDecimals: 1,
                 valueSuffix: '%'
               },
               legend: {
@@ -273,8 +281,8 @@
             var temp = _.object(_.map(factions, function(name) { return [name, {wins: 0, played: 0}]; }));
 
             _.each(games, function(game) {
-              var win = { hunters: false, shadows: false, neutral: false};
-              var played = { hunters: false, shadows: false, neutral: false};
+              var win = _.object(_.map(factions, function(f) { return [f, false] }));
+              var played = _.object(_.map(factions, function(f) { return [f, false] }));
 
               _.each(game.players, function(playerResult) {
                 var faction = getFaction(playerResult.character);
@@ -286,30 +294,22 @@
               });
 
               // calculate cumulatives
-              temp.hunters.played++;
-              temp.shadows.played++;
-              if (played.neutral)
-                temp.neutral.played++;
+              _.each(factions, function(f) {
+                if (played[f])
+                  temp[f].played++;
 
-              if (win.hunters)
-                temp.hunters.wins++;
+                if (win[f])
+                  temp[f].wins++;
+              });
 
-              if (win.shadows)
-                temp.shadows.wins++;
-
-              if (win.neutral)
-                temp.neutral.wins++;
-
-              series.hunters.push(temp.hunters.wins / temp.hunters.played * 100);
-              series.shadows.push(temp.shadows.wins / temp.shadows.played * 100);
-              series.neutral.push(temp.neutral.wins / temp.neutral.played * 100);
+              _.each(factions, function(f) {
+                series[f].push(temp[f].wins / temp[f].played * 100);
+              });
             });
 
-            series = [
-              { name: 'Hunters', data: series.hunters },
-              { name: 'Shadows', data: series.shadows },
-              { name: 'Neutrals', data: series.neutral }
-            ];
+            series = _.map(factions, function(f) {
+              return {name: f, data: series[f]};
+            });
 
             $('#faction-cumulative-win-rate').highcharts({
               chart: {
@@ -342,6 +342,7 @@
                   max: 100
               },
               tooltip: {
+                valueDecimals: 1,
                 valueSuffix: '%'
               },
               legend: {
@@ -423,6 +424,7 @@
                   max: 100
               },
               tooltip: {
+                valueDecimals: 1,
                 valueSuffix: '%'
               },
               legend: {
@@ -502,6 +504,7 @@
                   max: 100
               },
               tooltip: {
+                valueDecimals: 1,
                 valueSuffix: '%'
               },
               legend: {
@@ -524,8 +527,8 @@
             var temp = _.object(_.map(factions, function(name) { return [name, {alive: 0, played: 0}]; }));
 
             _.each(games, function(game) {
-              var alive = { hunters: false, shadows: false, neutral: false};
-              var played = { hunters: false, shadows: false, neutral: false};
+              var alive = _.object(_.map(factions, function(f) { return [f, false] }));
+              var played = _.object(_.map(factions, function(f) { return [f, false] }));
 
               _.each(game.players, function(playerResult) {
                 var faction = getFaction(playerResult.character);
@@ -537,30 +540,22 @@
               });
 
               // calculate cumulatives
-              temp.hunters.played++;
-              temp.shadows.played++;
-              if (played.neutral)
-                temp.neutral.played++;
+              _.each(factions, function(f) {
+                if (played[f])
+                  temp[f].played++;
 
-              if (alive.hunters)
-                temp.hunters.alive++;
+                if (alive[f])
+                  temp[f].alive++;
+              });
 
-              if (alive.shadows)
-                temp.shadows.alive++;
-
-              if (alive.neutral)
-                temp.neutral.alive++;
-
-              series.hunters.push(temp.hunters.alive / temp.hunters.played * 100);
-              series.shadows.push(temp.shadows.alive / temp.shadows.played * 100);
-              series.neutral.push(temp.neutral.alive / temp.neutral.played * 100);
+              _.each(factions, function(f) {
+                series[f].push(temp[f].alive / temp[f].played * 100);
+              });
             });
 
-            series = [
-              { name: 'Hunters', data: series.hunters },
-              { name: 'Shadows', data: series.shadows },
-              { name: 'Neutrals', data: series.neutral }
-            ];
+            series = _.map(factions, function(f) {
+              return {name: f, data: series[f]};
+            });
 
             $('#faction-cumulative-alive-rate').highcharts({
               chart: {
@@ -593,6 +588,7 @@
                   max: 100
               },
               tooltip: {
+                valueDecimals: 1,
                 valueSuffix: '%'
               },
               legend: {
@@ -649,7 +645,7 @@
               var characterAlives = [];
 
               _.each(factions, function(x) {
-                factionAr.push(x);
+                factionAr.push(x + '<br>Played: ' + factionTemp[x].played + '<br>Wins: ' + factionTemp[x].win + '<br>Alive: ' + factionTemp[x].alive);
                 factionWins.push(factionTemp[x].win / factionTemp[x].played * 100);
                 factionAlives.push(factionTemp[x].alive / factionTemp[x].played * 100);
               });
@@ -690,6 +686,7 @@
                   }
                 },
                 tooltip: {
+                  valueDecimals: 1,
                   valueSuffix: '%'
                 },
                 plotOptions: {
@@ -718,7 +715,7 @@
               $winCharacter.highcharts({
                 chart: {
                   polar: true,
-                  type: 'line'
+                  type: 'area'
                 },
                 title: {
                   text: ''
@@ -738,6 +735,7 @@
                   }
                 },
                 tooltip: {
+                  valueDecimals: 1,
                   valueSuffix: '%'
                 },
                 plotOptions: {
@@ -753,166 +751,18 @@
                 series: [
                   {
                     name: 'Win',
-                    data: characterWins
+                    data: characterWins,
+                    fillOpacity: 0.2
                   },
                   {
                     name: 'Alive',
-                    data: characterAlives
+                    data: characterAlives,
+                    fillOpacity: 0.2
                   }
                 ]
               });
-
-            // displays everything as a column chart
-            /*
-                          var $card = $(document.createElement('div')).addClass('card').appendTo($wrap);
-                          var $winFaction = $(document.createElement('div')).addClass('card-chart').appendTo($card);
-
-                          $winFaction.highcharts({
-                            chart: {
-                              type: 'column'
-                            },
-                            title: {
-                              text: jomax
-                            },
-                            xAxis: {
-                              categories: categories,
-                              crosshair: true
-                            },
-                            yAxis: {
-                              min: 0,
-                              max: 100,
-                              title: {
-                                text: ''
-                              }
-                            },
-                            tooltip: {
-                              valueSuffix: '%'
-                            },
-                            plotOptions: {
-                              column: {
-                                pointPadding: 0.2,
-                                borderWidth: 0,
-                                dataLabels: {
-                                  enabled: true,
-                                  format: '{y:.1f}%'
-                                }
-                              }
-                            },
-                            series: [
-                              {
-                                name: 'Win',
-                                data: winRates
-                              },
-                              {
-                                name: 'Alive',
-                                data: aliveRates
-                              }
-                            ]
-                          });
-            */
-
-            // scratch work
-            /*
-
-                          var $card = $(document.createElement('div')).addClass('card').appendTo($wrap);
-                          var $winFaction = $(document.createElement('div')).addClass('card-chart').appendTo($card);
-                          var $winCharacter = $(document.createElement('div')).addClass('card-chart').appendTo($card);
-
-                          //column (jomax win rate as a hunter, shadow, neutral)
-                          $winFaction.highcharts({
-                            chart: {
-                              type: 'column'
-                            },
-                            title: {
-                              text: jomax
-                            },
-                            xAxis: {
-                              categories: factions,
-                              crosshair: true
-                            },
-                            yAxis: {
-                              min: 0,
-                              max: 100,
-                              title: {
-                                text: ''
-                              }
-                            },
-                            tooltip: {
-                              valueSuffix: '%'
-                            },
-                            plotOptions: {
-                              column: {
-                                pointPadding: 0.2,
-                                borderWidth: 0,
-                                dataLabels: {
-                                  enabled: true,
-                                  format: '{y:.1f}%'
-                                }
-                              }
-                            },
-                            series: [
-                              {
-                                name: 'Win',
-                                data: _.map(factions, function(f) { return factionTemp[f].win / factionTemp[f].played * 100; })
-                              },
-                              {
-                                name: 'Alive',
-                                data: _.map(factions, function(f) { return factionTemp[f].alive / factionTemp[f].played * 100; })
-                              }
-                            ]
-                          });
-
-                          //spiderweb (jomax win rate as allie, agnes, ...)
-                          $winCharacter.highcharts({
-                            chart: {
-                              polar: true,
-                              type: 'line'
-                            },
-                            title: {
-                              text: ''
-                            },
-                            pane: {
-                              size: '80%'
-                            },
-                            xAxis: {
-                              categories: characters,
-                              tickmarkPlacement: 'on',
-                              lineWidth: 0
-                            },
-                            yAxis: {
-                              gridLineInterpolation: 'polygon',
-                              lineWidth: 0,
-                              min: 0
-                            },
-                            tooltip: {
-                              shared: true,
-                              pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
-                            },
-                            legend: {
-                              align: 'right',
-                              verticalAlign: 'top',
-                              y: 70,
-                              layout: 'vertical'
-                            },
-                            series: [
-                              {
-                                name: 'Win',
-                                data: _.map(characters, function(c) { return charTemp[c].win / charTemp[c].played * 100; }),
-                                pointPlacement: 'on'
-                              },
-                              {
-                                name: 'Alive',
-                                data: _.map(characters, function(c) { return charTemp[c].alive / charTemp[c].played * 100; }),
-                                pointPlacement: 'on'
-                              }
-                            ]
-                          });
-            */
             });
           };
-
-
-
 
           var buildCharts = function(games) {
             xAxisLabels = _.map(_.range(games.length), function(i) { return 'Game ' + (i+1) + '<br>' + games[i].date; });
