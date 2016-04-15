@@ -728,5 +728,40 @@
         "win" : false
       }
     }
+  },
+  {
+    "date" : "2016-04-14",
+    "players" : {
+      "rchen" : {
+        "alive" : false,
+        "character" : "Bob",
+        "win" : false
+      },
+      "sbhadkamkar" : {
+        "alive" : false,
+        "character" : "Valkyrie",
+        "win" : false
+      },
+      "cling": {
+        "alive": false,
+        "character": "Gregor",
+        "win": true
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Fuka",
+        "win" : true
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Allie",
+        "win" : true
+      },
+      "heng": {
+        "alive": false,
+        "character": "Werewolf",
+        "win": false
+      }
+    }
   }
 ]
