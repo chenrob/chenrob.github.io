@@ -10,12 +10,42 @@
         height: 400px;
         margin: 0 auto 40px;
       }
+
+      .card
+      {
+        display: inline-block;
+        width: 48%;
+        margin: 0 1% 40px;
+
+        outline: 1px solid #555;
+      }
+
+      .card-chart
+      {
+        display: inline-block;
+        margin: 0 1%;
+      }
+
+      .card-chart-1
+      {
+        width: 36%;
+      }
+
+      .card-chart-2
+      {
+        width: 60%;
+      }
+
+      .clearing { clear: both; }
     </style>
   </head>
   <body>
     <div id="employee-cumulative-win-rate" class="chart"></div>
     <div id="character-cumulative-win-rate" class="chart"></div>
     <div id="faction-cumulative-win-rate" class="chart"></div>
+
+    <div id="each-employee-win-rate" class="chart-wrap"></div>
+    <div class="clearing"></div>
 
     <div id="employee-cumulative-alive-rate" class="chart"></div>
     <div id="character-cumulative-alive-rate" class="chart"></div>
@@ -24,19 +54,32 @@
     <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script>
       jQuery(function() {
         (function() {
           var hunters = ['Ellen', 'Emi', 'Franklin', 'Fuka', 'George', 'Gregor'];
           var shadows = ['Ultrasoul', 'Unknown', 'Valkyrie', 'Vampire', 'Werewolf', 'Wight'];
           var neutrals = ['Agnes', 'Allie', 'Bob', 'Bryan', 'Catherine', 'Charles', 'Daniel', 'David'];
+
           var characters = _.union(hunters, shadows, neutrals);
+          var factions = ['hunters', 'shadows', 'neutral'];
 
           var employees, xAxisLabels;
 
           var sortSeries = function(ar) {
             return _.sortBy(ar, function(o) { return -1 * _.last(o.data) });
           };
+
+          var getFaction = function(character) {
+            var faction = 'neutral';
+            if (_.contains(hunters, character))
+              faction = 'hunters';
+            else if (_.contains(shadows, character))
+              faction = 'shadows';
+
+            return faction;
+          }
 
           var buildEmployeeCumulativeWinRate = function(games) {
             /*
@@ -99,6 +142,16 @@
             series = _.map(series, function(ar, jomax) { return {name: jomax, data: ar}; })
 
             $('#employee-cumulative-win-rate').highcharts({
+              chart: {
+                type: 'spline'
+              },
+              plotOptions: {
+                  series: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+              },
               title: {
                 text: 'Employee Cumulative Win Rate Over Time'
               },
@@ -168,6 +221,16 @@
             series = _.map(series, function(ar, name) { return {name: name, data: ar}; })
 
             $('#character-cumulative-win-rate').highcharts({
+              chart: {
+                type: 'spline'
+              },
+              plotOptions: {
+                  series: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+              },
               title: {
                 text: 'Character Cumulative Win Rate Over Time'
               },
@@ -206,20 +269,15 @@
           var buildFactionCumulativeWinRate = function(games) {
             // refer to buildEmployeeCumulativeWinRate for what the variables and the algorithm does
 
-            var series = { hunters: [], shadows: [], neutral: [] };
-            var temp = { hunters: {wins: 0, played: 0}, shadows: {wins: 0, played: 0}, neutral: {wins: 0, played: 0}};
+            var series = _.object(_.map(factions, function(name) { return [name, []] }));
+            var temp = _.object(_.map(factions, function(name) { return [name, {wins: 0, played: 0}]; }));
 
             _.each(games, function(game) {
               var win = { hunters: false, shadows: false, neutral: false};
               var played = { hunters: false, shadows: false, neutral: false};
 
               _.each(game.players, function(playerResult) {
-                var faction = 'neutral';
-
-                if (_.contains(hunters, playerResult.character))
-                  faction = 'hunters';
-                else if (_.contains(shadows, playerResult.character))
-                  faction = 'shadows';
+                var faction = getFaction(playerResult.character);
 
                 played[faction] = true;
 
@@ -254,6 +312,16 @@
             ];
 
             $('#faction-cumulative-win-rate').highcharts({
+              chart: {
+                type: 'spline'
+              },
+              plotOptions: {
+                  series: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+              },
               title: {
                 text: 'Faction Cumulative Win Rate Over Time'
               },
@@ -325,6 +393,16 @@
             series = _.map(series, function(ar, jomax) { return {name: jomax, data: ar}; })
 
             $('#employee-cumulative-alive-rate').highcharts({
+              chart: {
+                type: 'spline'
+              },
+              plotOptions: {
+                  series: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+              },
               title: {
                 text: 'Employee Cumulative Alive Rate Over Time'
               },
@@ -394,6 +472,16 @@
             series = _.map(series, function(ar, name) { return {name: name, data: ar}; })
 
             $('#character-cumulative-alive-rate').highcharts({
+              chart: {
+                type: 'spline'
+              },
+              plotOptions: {
+                  series: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+              },
               title: {
                 text: 'Character Cumulative Alive Rate Over Time'
               },
@@ -432,20 +520,15 @@
           var buildFactionCumulativeAliveRate = function(games) {
             // refer to buildEmployeeCumulativeWinRate for what the variables and the algorithm does
 
-            var series = { hunters: [], shadows: [], neutral: [] };
-            var temp = { hunters: {alive: 0, played: 0}, shadows: {alive: 0, played: 0}, neutral: {alive: 0, played: 0}};
+            var series = _.object(_.map(factions, function(name) { return [name, []] }));
+            var temp = _.object(_.map(factions, function(name) { return [name, {alive: 0, played: 0}]; }));
 
             _.each(games, function(game) {
               var alive = { hunters: false, shadows: false, neutral: false};
               var played = { hunters: false, shadows: false, neutral: false};
 
               _.each(game.players, function(playerResult) {
-                var faction = 'neutral';
-
-                if (_.contains(hunters, playerResult.character))
-                  faction = 'hunters';
-                else if (_.contains(shadows, playerResult.character))
-                  faction = 'shadows';
+                var faction = getFaction(playerResult.character);
 
                 played[faction] = true;
 
@@ -480,6 +563,16 @@
             ];
 
             $('#faction-cumulative-alive-rate').highcharts({
+              chart: {
+                type: 'spline'
+              },
+              plotOptions: {
+                  series: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+              },
               title: {
                 text: 'Faction Cumulative Alive Rate Over Time'
               },
@@ -515,21 +608,335 @@
             });
           };
 
-          var url = '/games.json';
-          if (window.location.href.indexOf('http') != 0)
-            url = 'http://chenrob.github.io' + url;
+          var buildEachEmployeeStatsCard = function(games) {
+            var $wrap = $('#each-employee-win-rate');
 
-          $.getJSON(url, function(games) {
+            _.each(employees, function(jomax) {
+              var charSeries = _.object(_.map(characters, function(name) { return [name, []] }));
+              var charTemp = _.object(_.map(characters, function(name) { return [name, {alive: 0, played: 0, win: 0}]; }));
+
+              var factionSeries = _.object(_.map(factions, function(name) { return [name, []] }));
+              var factionTemp = _.object(_.map(factions, function(name) { return [name, {alive: 0, played: 0, win: 0}]; }));
+
+              _.each(games, function(game) {
+                var players = game.players;
+                var result = players[jomax];
+
+                if (result) {
+                  var character = result.character;
+                  var faction = getFaction(character);
+
+                  charTemp[character].played++;
+                  factionTemp[faction].played++;
+
+                  if (result.alive) {
+                    charTemp[character].alive++;
+                    factionTemp[faction].alive++;
+                  }
+
+                  if (result.win) {
+                    charTemp[character].win++;
+                    factionTemp[faction].win++;
+                  }
+                }
+              });
+
+              var factionAr = [];
+              var factionWins = [];
+              var factionAlives = [];
+              var characterAr = [];
+              var characterWins = [];
+              var characterAlives = [];
+
+              _.each(factions, function(x) {
+                factionAr.push(x);
+                factionWins.push(factionTemp[x].win / factionTemp[x].played * 100);
+                factionAlives.push(factionTemp[x].alive / factionTemp[x].played * 100);
+              });
+
+              _.each(characters, function(x) {
+                if (!charTemp[x].played)
+                  return;
+
+                var winPct = (charTemp[x].win / charTemp[x].played * 100);
+                var alivePct = (charTemp[x].alive / charTemp[x].played * 100);
+
+                characterAr.push(x + '<br>Win' + winPct.toFixed(1) + '%<br>Alive' + alivePct.toFixed(1) + '%');
+                characterWins.push(winPct);
+                characterAlives.push(alivePct);
+              });
+
+              var $card = $(document.createElement('div')).addClass('card').appendTo($wrap);
+              var $winFaction = $(document.createElement('div')).addClass('card-chart card-chart-1').appendTo($card);
+              var $winCharacter = $(document.createElement('div')).addClass('card-chart card-chart-2').appendTo($card);
+
+              //column (jomax win rate as a hunter, shadow, neutral)
+              $winFaction.highcharts({
+                chart: {
+                  type: 'column'
+                },
+                title: {
+                  text: jomax
+                },
+                xAxis: {
+                  categories: factionAr,
+                  crosshair: true
+                },
+                yAxis: {
+                  min: 0,
+                  max: 100,
+                  title: {
+                    text: ''
+                  }
+                },
+                tooltip: {
+                  valueSuffix: '%'
+                },
+                plotOptions: {
+                  column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0,
+                    dataLabels: {
+                      enabled: true,
+                      format: '{y:.1f}%'
+                    }
+                  }
+                },
+                series: [
+                  {
+                    name: 'Win',
+                    data: factionWins
+                  },
+                  {
+                    name: 'Alive',
+                    data: factionAlives
+                  }
+                ]
+              });
+
+              //spiderweb (jomax win rate as allie, agnes, ...)
+              $winCharacter.highcharts({
+                chart: {
+                  polar: true,
+                  type: 'line'
+                },
+                title: {
+                  text: ''
+                },
+                xAxis: {
+                  categories: characterAr,
+                  crosshair: true
+                },
+                yAxis: {
+                  min: 0,
+                  max: 100,
+                  tickInterval: 20,
+                  minorTickInterval: 10,
+                  minorGridLineDashStyle: 'ShortDot',
+                  title: {
+                    text: ''
+                  }
+                },
+                tooltip: {
+                  valueSuffix: '%'
+                },
+                plotOptions: {
+                  column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0,
+                    dataLabels: {
+                      enabled: true,
+                      format: '{y:.1f}%'
+                    }
+                  }
+                },
+                series: [
+                  {
+                    name: 'Win',
+                    data: characterWins
+                  },
+                  {
+                    name: 'Alive',
+                    data: characterAlives
+                  }
+                ]
+              });
+
+            // displays everything as a column chart
+            /*
+                          var $card = $(document.createElement('div')).addClass('card').appendTo($wrap);
+                          var $winFaction = $(document.createElement('div')).addClass('card-chart').appendTo($card);
+
+                          $winFaction.highcharts({
+                            chart: {
+                              type: 'column'
+                            },
+                            title: {
+                              text: jomax
+                            },
+                            xAxis: {
+                              categories: categories,
+                              crosshair: true
+                            },
+                            yAxis: {
+                              min: 0,
+                              max: 100,
+                              title: {
+                                text: ''
+                              }
+                            },
+                            tooltip: {
+                              valueSuffix: '%'
+                            },
+                            plotOptions: {
+                              column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0,
+                                dataLabels: {
+                                  enabled: true,
+                                  format: '{y:.1f}%'
+                                }
+                              }
+                            },
+                            series: [
+                              {
+                                name: 'Win',
+                                data: winRates
+                              },
+                              {
+                                name: 'Alive',
+                                data: aliveRates
+                              }
+                            ]
+                          });
+            */
+
+            // scratch work
+            /*
+
+                          var $card = $(document.createElement('div')).addClass('card').appendTo($wrap);
+                          var $winFaction = $(document.createElement('div')).addClass('card-chart').appendTo($card);
+                          var $winCharacter = $(document.createElement('div')).addClass('card-chart').appendTo($card);
+
+                          //column (jomax win rate as a hunter, shadow, neutral)
+                          $winFaction.highcharts({
+                            chart: {
+                              type: 'column'
+                            },
+                            title: {
+                              text: jomax
+                            },
+                            xAxis: {
+                              categories: factions,
+                              crosshair: true
+                            },
+                            yAxis: {
+                              min: 0,
+                              max: 100,
+                              title: {
+                                text: ''
+                              }
+                            },
+                            tooltip: {
+                              valueSuffix: '%'
+                            },
+                            plotOptions: {
+                              column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0,
+                                dataLabels: {
+                                  enabled: true,
+                                  format: '{y:.1f}%'
+                                }
+                              }
+                            },
+                            series: [
+                              {
+                                name: 'Win',
+                                data: _.map(factions, function(f) { return factionTemp[f].win / factionTemp[f].played * 100; })
+                              },
+                              {
+                                name: 'Alive',
+                                data: _.map(factions, function(f) { return factionTemp[f].alive / factionTemp[f].played * 100; })
+                              }
+                            ]
+                          });
+
+                          //spiderweb (jomax win rate as allie, agnes, ...)
+                          $winCharacter.highcharts({
+                            chart: {
+                              polar: true,
+                              type: 'line'
+                            },
+                            title: {
+                              text: ''
+                            },
+                            pane: {
+                              size: '80%'
+                            },
+                            xAxis: {
+                              categories: characters,
+                              tickmarkPlacement: 'on',
+                              lineWidth: 0
+                            },
+                            yAxis: {
+                              gridLineInterpolation: 'polygon',
+                              lineWidth: 0,
+                              min: 0
+                            },
+                            tooltip: {
+                              shared: true,
+                              pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+                            },
+                            legend: {
+                              align: 'right',
+                              verticalAlign: 'top',
+                              y: 70,
+                              layout: 'vertical'
+                            },
+                            series: [
+                              {
+                                name: 'Win',
+                                data: _.map(characters, function(c) { return charTemp[c].win / charTemp[c].played * 100; }),
+                                pointPlacement: 'on'
+                              },
+                              {
+                                name: 'Alive',
+                                data: _.map(characters, function(c) { return charTemp[c].alive / charTemp[c].played * 100; }),
+                                pointPlacement: 'on'
+                              }
+                            ]
+                          });
+            */
+            });
+          };
+
+
+
+
+          var buildCharts = function(games) {
             xAxisLabels = _.map(_.range(games.length), function(i) { return 'Game ' + (i+1) + '<br>' + games[i].date; });
             employees = _.uniq(_.flatten(_.map(_.pluck(games, 'players'), _.keys)));
 
             buildEmployeeCumulativeWinRate(games);
             buildCharacterCumulativeWinRate(games);
             buildFactionCumulativeWinRate(games);
+
+            buildEachEmployeeStatsCard(games);
+
             buildEmployeeCumulativeAliveRate(games);
             buildCharacterCumulativeAliveRate(games);
             buildFactionCumulativeAliveRate(games);
-          });
+          };
+
+          var url = '/games.json';
+          if (window.location.href.indexOf('http') != 0)
+            url = 'http://chenrob.github.io' + url;
+          $.getJSON(url, buildCharts);
+
+// local machine debugging
+//var gamesjson =
+//          buildCharts(gamesjson);
         })();
       });
     </script>
