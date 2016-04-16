@@ -803,5 +803,65 @@
         "win" : false
       }
     }
+  },
+  {
+    "date" : "2016-04-15",
+    "players" : {
+      "rchen" : {
+        "alive" : true,
+        "character" : "Bob",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : false,
+        "character" : "Werewolf",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "George",
+        "win" : true
+      },
+      "cling": {
+        "alive": false,
+        "character": "Unknown",
+        "win": false
+      },
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Emi",
+        "win" : true
+      }
+    }
+  },
+  {
+    "date" : "2016-04-15",
+    "players" : {
+      "rchen" : {
+        "alive" : false,
+        "character" : "Wight",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Agnes",
+        "win" : true
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Ellen",
+        "win" : true
+      },
+      "cling": {
+        "alive": false,
+        "character": "Vampire",
+        "win": false
+      },
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Fuka",
+        "win" : true
+      }
+    }
   }
 ]
