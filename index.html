@@ -698,7 +698,7 @@
                   backgroundColor: null
                 },
                 title: {
-                  text: jomax
+                  text: jomax + " -- WinExp: " + (Math.round(_getEmployeeWinsOverExpectationRate(jomax, games) * 10000) / 100) + "%"
                 },
                 xAxis: {
                   categories: factionAr,
@@ -789,6 +789,48 @@
                 ]
               });
             });
+          };
+          
+          var _getCharacterWinRateNormalized = function(character, employee, games) {
+            var played = 0;
+            var wins = 0;
+            
+            _.each(games, function(game) {
+              var players = _.clone(game.players);
+              
+              var playedCharacters = _.each(players, function(result, key) {
+                if (result.character == character && key != employee) {
+                  played++;
+                  if (result.win)
+                    wins++;
+                }
+              });
+            });
+            
+            return played > 0 ? wins/played : 0.5;
+          };
+
+          var _getEmployeeWinsOverExpectationRate = function(employee, games) {
+            var wins = 0;
+            var expectedWins = 0;
+            var characterWinRates = {};
+            
+            _.each(games, function(game) {
+              var players = _.clone(game.players);
+
+              if (players[employee]) {
+                if (players[employee].win)
+                  wins++;
+                
+                if (!characterWinRates[players[employee].character]) {
+                  characterWinRates[players[employee].character] = _getCharacterWinRateNormalized(players[employee].character, employee, games);
+                }
+                
+                expectedWins += characterWinRates[players[employee].character];
+              }
+            });
+            
+            return expectedWins > 0 ? wins/expectedWins : 0;
           };
 
           var buildCharts = function(games) {
