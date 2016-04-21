@@ -866,6 +866,11 @@
         "alive" : true,
         "character" : "Fuka",
         "win" : true
+      },
+      "lwang" : {
+        "alive": true,
+        "character": "George",
+        "win": true
       }
     }
   },
