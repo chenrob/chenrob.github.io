@@ -913,5 +913,175 @@
         "win" : true
       }
     }
+  },
+  {
+    "date" : "2016-04-21",
+    "players" : {
+      "rchen" : {
+        "alive" : false,
+        "character" : "Vampire",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : false,
+        "character" : "Wight",
+        "win" : false
+      },
+      "sbhadkamk" : {
+        "alive" : true,
+        "character" : "Daniel",
+        "win" : true
+      },
+      "cling" : {
+        "alive" : true,
+        "character" : "George",
+        "win": true
+      },
+      "hong" : {
+        "alive" : false,
+        "character" : "Fuka",
+        "win" : true
+      }
+    }
+  },
+  {
+    "date" : "2016-04-21",
+    "players" : {
+      "rchen" : {
+        "alive" : true,
+        "character" : "Unknown",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Emi",
+        "win" : false
+      },
+      "sbhadkamk" : {
+        "alive" : false,
+        "character" : "Catherine",
+        "win" : true
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Vampire",
+        "win" : false
+      },
+      "cling" : {
+        "alive" : true,
+        "character" : "Bob",
+        "win" : false
+      },
+      "hong" : {
+        "alive" : true,
+        "character" : "Gregor",
+        "win" : false
+      }
+    }
+  },
+  {
+    "date" : "2016-04-21",
+    "players" : {
+      "rchen" : {
+        "alive" : false,
+        "character" : "Daniel",
+        "win" : true
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Valkyrie",
+        "win" : false
+      },
+      "sbhadkamk" : {
+        "alive" : true,
+        "character" : "Ultrasoul",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Ellen",
+        "win" : false
+      },
+      "cling" : {
+        "alive" : true,
+        "character" : "Allie",
+        "win" : true
+      },
+      "hong" : {
+        "alive" : true,
+        "character" : "George",
+        "win" : false
+      }
+    }
+  },
+  {
+    "date" : "2016-04-21",
+    "players" : {
+      "rchen" : {
+        "alive" : false,
+        "character" : "Vampire",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Werewolf",
+        "win" : false
+      },
+      "sbhadkamk" : {
+        "alive" : true,
+        "character" : "Emi",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Fuka",
+        "win" : false
+      },
+      "cling" : {
+        "alive" : true,
+        "character" : "Bryan",
+        "win" : true
+      },
+      "hong" : {
+        "alive" : true,
+        "character" : "Daniel",
+        "win" : false
+      }
+    }
+  },
+  {
+    "date" : "2016-04-21",
+    "players" : {
+      "rchen" : {
+        "alive" : false,
+        "character" : "Vampire",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Daniel",
+        "win" : true
+      },
+      "sbhadkamk" : {
+        "alive" : false,
+        "character" : "Allie",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : false,
+        "character" : "Wight",
+        "win" : false
+      },
+      "cling" : {
+        "alive" : true,
+        "character" : "Ellen",
+        "win" : true
+      },
+      "hong" : {
+        "alive" : false,
+        "character" : "Fuka",
+        "win" : true
+      }
+    }
   }
 ]
