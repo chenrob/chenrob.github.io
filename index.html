@@ -672,7 +672,7 @@
                 var alivePct = (charTemp[x].alive / charTemp[x].played * 100);
 
                 var insertFn = 'unshift';
-                if (!winPct && !alivePct)
+                if (!winPct)// && !alivePct)
                   insertFn = 'push';
 
                 characterAr[insertFn].call(characterAr, x + '<br>Win' + winPct.toFixed(1) + '%<br>Alive' + alivePct.toFixed(1) + '%');
