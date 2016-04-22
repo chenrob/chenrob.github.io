@@ -75,6 +75,7 @@
           var employees, xAxisLabels;
 
           // rawr single point of truth
+          var blacklist_jomax = ['ischiffer'];
           var FACTION_CHARS = {
             "Hunters": ['Ellen', 'Emi', 'Franklin', 'Fuka', 'George', 'Gregor'],
             "Shadows": ['Ultrasoul', 'Unknown', 'Valkyrie', 'Vampire', 'Werewolf', 'Wight'],
@@ -790,14 +791,14 @@
               });
             });
           };
-          
+
           var _getCharacterWinRateNormalized = function(character, employee, games) {
             var played = 0;
             var wins = 0;
-            
+
             _.each(games, function(game) {
               var players = _.clone(game.players);
-              
+
               var playedCharacters = _.each(players, function(result, key) {
                 if (result.character == character && key != employee) {
                   played++;
@@ -806,7 +807,7 @@
                 }
               });
             });
-            
+
             return played > 0 ? wins/played : 0.5;
           };
 
@@ -814,28 +815,28 @@
             var wins = 0;
             var expectedWins = 0;
             var characterWinRates = {};
-            
+
             _.each(games, function(game) {
               var players = _.clone(game.players);
 
               if (players[employee]) {
                 if (players[employee].win)
                   wins++;
-                
+
                 if (!characterWinRates[players[employee].character]) {
                   characterWinRates[players[employee].character] = _getCharacterWinRateNormalized(players[employee].character, employee, games);
                 }
-                
+
                 expectedWins += characterWinRates[players[employee].character];
               }
             });
-            
+
             return expectedWins > 0 ? wins/expectedWins : 0;
           };
 
           var buildCharts = function(games) {
             xAxisLabels = _.map(_.range(games.length), function(i) { return 'Game ' + (i+1) + '<br>' + games[i].date; });
-            employees = _.uniq(_.flatten(_.map(_.pluck(games, 'players'), _.keys)));
+            employees = _.difference(_.uniq(_.flatten(_.map(_.pluck(games, 'players'), _.keys))), blacklist_jomax);
 
             buildEmployeeCumulativeWinRate(games);
             buildCharacterCumulativeWinRate(games);
