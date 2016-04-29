@@ -1083,5 +1083,98 @@
         "win" : true
       }
     }
+  },
+  {
+    "date" : "2016-04-28",
+    "players" : {
+      "rchen" : {
+        "alive" : false,
+        "character" : "George",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : false,
+        "character" : "Emi",
+        "win" : false
+      },
+      "hong" : {
+        "alive" : true,
+        "character" : "Vampire",
+        "win" : true
+      },
+      "cling" : {
+        "alive" : false,
+        "character" : "Ultrasoul",
+        "win" : true
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Bob",
+        "win" : true
+      }
+    }
+  },
+  {
+    "date" : "2016-04-28",
+    "players" : {
+      "rchen" : {
+        "alive" : true,
+        "character" : "Franklin",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Vampire",
+        "win" : false
+      },
+      "hong" : {
+        "alive" : true,
+        "character" : "David",
+        "win" : true
+      },
+      "cling" : {
+        "alive" : true,
+        "character" : "Wight",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Gregor",
+        "win" : false
+      }
+    }
+  },
+  {
+    "date" : "2016-04-28",
+    "players" : {
+      "rchen" : {
+        "alive" : true,
+        "character" : "Werewolf",
+        "win" : true
+      },
+      "afowler" : {
+        "alive" : false,
+        "character" : "George",
+        "win" : false
+      },
+      "hong" : {
+        "alive" : true,
+        "character" : "David",
+        "win" : true
+      },
+      "cling" : {
+        "alive" : true,
+        "character" : "Vampire",
+        "win" : true
+      },
+      "lwang" : {
+        "alive" : false,
+        "character" : "Franklin",
+        "win" : false
+      }
+    }
   }
 ]
+
+
+
