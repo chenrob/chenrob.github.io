@@ -1083,6 +1083,95 @@
         "win" : true
       }
     }
+  },  {
+    "date" : "2016-04-22",
+    "players" : {
+      "cling" : {
+        "alive" : false,
+        "character" : "Franklin",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Allie",
+        "win" : true
+      },
+      "lwang" : {
+        "alive" : false,
+        "character" : "George",
+        "win" : false
+      },
+      "hong" : {
+        "alive" : true,
+        "character" : "Ultrasoul",
+        "win" : true
+      },
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Werewolf",
+        "win" : true
+      }
+    }
+  },
+  {
+    "date" : "2016-04-22",
+    "players" : {
+      "afowler" : {
+        "alive" : true,
+        "character" : "Werewolf",
+        "win" : true
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Bryan",
+        "win" : false
+      },
+      "hong" : {
+        "alive" : false,
+        "character" : "George",
+        "win" : false
+      },
+      "adebruyn" : {
+        "alive" : false,
+        "character" : "Fuka",
+        "win" : false
+      },
+      "cling" : {
+        "alive" : true,
+        "character" : "Ultrasoul",
+        "win" : true
+      }
+    }
+  },
+  {
+    "date" : "2016-04-22",
+    "players" : {
+      "afowler" : {
+        "alive" : true,
+        "character" : "Catherine",
+        "win" : true
+      },
+      "lwang" : {
+        "alive" : false,
+        "character" : "Ultrasoul",
+        "win" : false
+      },
+      "hong" : {
+        "alive" : true,
+        "character" : "Gregor",
+        "win" : true
+      },
+      "adebruyn" : {
+        "alive" : false,
+        "character" : "Ellen",
+        "win" : true
+      },
+      "cling" : {
+        "alive" : false,
+        "character" : "Vampire",
+        "win" : false
+      }
+    }
   },
   {
     "date" : "2016-04-28",
@@ -1175,6 +1264,4 @@
     }
   }
 ]
-
-
 
