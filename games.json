@@ -1412,6 +1412,46 @@
         "win": false
       }
     }
+  },
+  {
+    "date" : "2016-05-12",
+    "players" : {
+      "hong" : {
+        "alive" : true,
+        "character" : "Bryan",
+        "win" : false
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Wight",
+        "win" : true
+      },
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Charles",
+        "win" : false
+      },
+      "sbhadkamk" : {
+        "alive" : false,
+        "character" : "Ellen",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Ultrasoul",
+        "win" : true
+      },
+      "cling" : {
+        "alive" : true,
+        "character" : "Catherine",
+        "win" : false
+      },
+      "rchen": {
+        "alive": false,
+        "character": "Gregor",
+        "win": false
+      }
+    }
   }
 ]
 
