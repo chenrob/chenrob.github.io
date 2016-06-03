@@ -1452,6 +1452,114 @@
         "win": false
       }
     }
+  },
+  {
+    "date" : "2016-06-02",
+    "players" : {
+      "rchen": {
+        "alive": false,
+        "character": "Daniel",
+        "win": true
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Unknown",
+        "win" : false
+      },
+      "sbhadkamk" : {
+        "alive" : true,
+        "character" : "Wight",
+        "win" : false
+      },
+      "adebruyn" : {
+        "alive" : true,
+        "character" : "Franklin",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Charles",
+        "win" : false
+      },
+      "cling" : {
+        "alive" : true,
+        "character" : "George",
+        "win" : false
+      }
+    }
+  },
+  {
+    "date" : "2016-06-02",
+    "players" : {
+      "rchen": {
+        "alive": true,
+        "character": "Fuka",
+        "win": true
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Charles",
+        "win" : true
+      },
+      "sbhadkamk" : {
+        "alive" : false,
+        "character" : "Bryan",
+        "win" : true
+      },
+      "adebruyn" : {
+        "alive" : false,
+        "character" : "Wight",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Ellen",
+        "win" : true
+      },
+      "cling" : {
+        "alive" : false,
+        "character" : "Vampire",
+        "win" : false
+      }
+    }
+  },
+  {
+    "date" : "2016-06-02",
+    "players" : {
+      "rchen": {
+        "alive": true,
+        "character": "David",
+        "win": true
+      },
+      "afowler" : {
+        "alive" : true,
+        "character" : "Wight",
+        "win" : true
+      },
+      "sbhadkamk" : {
+        "alive" : false,
+        "character" : "Charles",
+        "win" : false
+      },
+      "adebruyn" : {
+        "alive" : false,
+        "character" : "Fuka",
+        "win" : false
+      },
+      "lwang" : {
+        "alive" : true,
+        "character" : "Vampire",
+        "win" : true
+      },
+      "cling" : {
+        "alive" : false,
+        "character" : "Gregor",
+        "win" : false
+      }
+    }
   }
 ]
+
+
+
 
