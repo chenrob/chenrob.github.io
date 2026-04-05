@@ -1,3 +1,3 @@
-# midoshiro.com / robertchen.{org, net, ca} / chenrob.com / adthx.com / aebri.com
+# midoshiro.com / robertchen.{org, net, ca} / adthx.com / aebri.com
 
 hello world
